@@ -79,11 +79,10 @@ class TextureManager {
 }
 
 class ModuleChannel {
-  late MethodChannel _channel;
+  MethodChannel _channel = MethodChannel("demo_channel");
   List<Future<dynamic> Function(MethodCall call)> methodList = [];
 
   ModuleChannel() {
-    _channel = MethodChannel("demo_channel");
     _channel.setMethodCallHandler(handleMassage);
   }
 
