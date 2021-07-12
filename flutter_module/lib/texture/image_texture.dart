@@ -9,8 +9,9 @@ import 'package:flutter/services.dart';
 
 class ImageTexture extends StatefulWidget {
   final String? url;
+  final String? pageId;
 
-  ImageTexture({this.url});
+  ImageTexture({this.pageId, this.url});
 
   @override
   _ImageTextureState createState() => _ImageTextureState();
@@ -19,6 +20,7 @@ class ImageTexture extends StatefulWidget {
 class _ImageTextureState extends State<ImageTexture> {
   int textureId = -1;
   String? url;
+  String? pageId;
 
   @override
   void initState() {
@@ -31,7 +33,10 @@ class _ImageTextureState extends State<ImageTexture> {
     if (url == null) {
       textureId = -1;
     } else {
-      textureId = await TextureManager().getTextureId(url);
+      textureId = await TextureManager().getTextureId(
+        pageId,
+        url,
+      );
       setState(() {});
     }
   }
@@ -64,19 +69,38 @@ class TextureManager {
     return TextureManager._internal();
   }
 
-  Future<int> getTextureId(String? url) async {
-    if (url == null || url.isEmpty) {
+  Future<int> getTextureId(String? pageId, String? url) async {
+    if (pageId == null || pageId.isEmpty || url == null || url.isEmpty) {
       return -1;
     }
 
-    return await _channel.getImageTextureIdByUrl(url);
+    return await _channel.getImageTextureIdByUrl(pageId, url);
   }
 }
 
 class ModuleChannel {
-  MethodChannel _channel = const MethodChannel("demo_channel");
+  late MethodChannel _channel;
+  List<Future<dynamic> Function(MethodCall call)> methodList = [];
 
-  Future<int> getImageTextureIdByUrl(String url) async {
-    return await _channel.invokeMethod("getTexture", {'url': url});
+  ModuleChannel() {
+    _channel = MethodChannel("demo_channel");
+    _channel.setMethodCallHandler(handleMassage);
+  }
+
+  Future<dynamic> handleMassage(MethodCall call) async {
+    methodList.forEach((element) {
+      element.call(call);
+    });
+  }
+
+  void registerMethod(Future<dynamic> Function(MethodCall call) method) {
+    methodList.add(method);
+  }
+
+  Future<int> getImageTextureIdByUrl(String pageId, String url) async {
+    return await _channel.invokeMethod("getTexture", {
+      'pageId': pageId,
+      'url': url,
+    });
   }
 }
