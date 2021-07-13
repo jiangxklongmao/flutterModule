@@ -11,12 +11,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ModuleChannel moduleChannel = ModuleChannel();
   String? pageId;
   String? url;
 
   @override
   void initState() {
+    ModuleChannel moduleChannel = ModuleChannel();
     moduleChannel.registerMethod((call) async {
       switch (call.method) {
         case "init":

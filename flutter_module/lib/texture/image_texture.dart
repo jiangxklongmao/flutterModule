@@ -25,6 +25,7 @@ class _ImageTextureState extends State<ImageTexture> {
   @override
   void initState() {
     url = widget.url;
+    pageId = widget.pageId;
     getData();
     super.initState();
   }
@@ -43,16 +44,25 @@ class _ImageTextureState extends State<ImageTexture> {
 
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
-        child: textureId == -1
-            ? Container(
-                width: 100,
-                height: 100,
-                color: Colors.pink,
-              )
-            : Texture(
-                textureId: textureId,
-              ));
+    // return RepaintBoundary(
+    //     child: textureId == -1
+    //         ? Container(
+    //             width: 100,
+    //             height: 100,
+    //             color: Colors.pink,
+    //           )
+    //         : Texture(
+    //             textureId: textureId,
+    //           ));
+    return textureId == -1
+        ? Container(
+            width: 100,
+            height: 100,
+            color: Colors.pink,
+          )
+        : Texture(
+            textureId: textureId,
+          );
   }
 }
 
@@ -82,10 +92,6 @@ class ModuleChannel {
   MethodChannel _channel = MethodChannel("demo_channel");
   List<Future<dynamic> Function(MethodCall call)> methodList = [];
 
-  ModuleChannel() {
-    _channel.setMethodCallHandler(handleMassage);
-  }
-
   Future<dynamic> handleMassage(MethodCall call) async {
     methodList.forEach((element) {
       element.call(call);
@@ -94,6 +100,9 @@ class ModuleChannel {
 
   void registerMethod(Future<dynamic> Function(MethodCall call) method) {
     methodList.add(method);
+    if (!_channel.checkMethodCallHandler(handleMassage)) {
+      _channel.setMethodCallHandler(handleMassage);
+    }
   }
 
   Future<int> getImageTextureIdByUrl(String pageId, String url) async {
