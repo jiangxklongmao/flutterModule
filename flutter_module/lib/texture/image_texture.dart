@@ -56,12 +56,16 @@ class _ImageTextureState extends State<ImageTexture> {
     //           ));
     return textureId == -1
         ? Container(
-            width: 100,
-            height: 100,
+            width: 200,
+            height: 200,
             color: Colors.pink,
           )
-        : Texture(
-            textureId: textureId,
+        : SizedBox(
+            width: 200,
+            height: 200,
+            child: Texture(
+              textureId: textureId,
+            ),
           );
   }
 }

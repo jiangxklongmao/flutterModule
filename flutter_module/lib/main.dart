@@ -43,8 +43,8 @@ class _MyAppState extends State<MyApp> {
             color: Colors.green,
             child: Center(
               child: SizedBox(
-                width: 100,
-                height: 100,
+                width: 200,
+                height: 200,
                 child: ImageTexture(
                   pageId: pageId,
                   url: url,
