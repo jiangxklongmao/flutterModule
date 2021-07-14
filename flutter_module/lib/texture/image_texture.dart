@@ -115,4 +115,10 @@ class ModuleChannel {
       'url': url,
     });
   }
+
+  void openFlutterPage(String pageId) async {
+    return await _channel.invokeMethod("openFlutterPage", {
+      'pageId': pageId,
+    });
+  }
 }
