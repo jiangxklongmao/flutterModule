@@ -53,13 +53,6 @@ class _MyAppState extends State<MyApp> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "page $pageId",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
                     SizedBox(
                       width: 200,
                       height: 200,
@@ -79,6 +72,13 @@ class _MyAppState extends State<MyApp> {
                         "Open Flutter Page",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "page $pageId",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ],
                 ),
