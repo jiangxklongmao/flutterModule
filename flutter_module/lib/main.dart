@@ -53,6 +53,13 @@ class _MyAppState extends State<MyApp> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Text(
+                      "page $pageId",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     SizedBox(
                       width: 200,
                       height: 200,
