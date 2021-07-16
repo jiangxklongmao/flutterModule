@@ -104,9 +104,10 @@ class ModuleChannel {
 
   void registerMethod(Future<dynamic> Function(MethodCall call) method) {
     methodList.add(method);
-    if (!_channel.checkMethodCallHandler(handleMassage)) {
-      _channel.setMethodCallHandler(handleMassage);
-    }
+    // if (!_channel.checkMethodCallHandler(handleMassage)) {
+    //   _channel.setMethodCallHandler(handleMassage);
+    // }
+    _channel.setMethodCallHandler(handleMassage);
   }
 
   Future<int> getImageTextureIdByUrl(String pageId, String url) async {
