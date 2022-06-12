@@ -1,18 +1,20 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_module/texture/image_texture.dart';
 
 @pragma('vm:entry-point')
-void main() {
-  runApp(MyApp());
+void others() {
+  runApp(OthersApp());
 }
 
-class MyApp extends StatefulWidget {
+class OthersApp extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _OthersState createState() => _OthersState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _OthersState extends State<OthersApp> {
   @override
   void initState() {
     super.initState();
@@ -23,7 +25,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: Text("Main"),
+            title: Text("Others"),
           ),
           body: Container(
             width: double.infinity,
@@ -31,9 +33,9 @@ class _MyAppState extends State<MyApp> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(0)),
-                color: Colors.green),
+                color: Colors.orangeAccent),
             child: Text(
-              "Main.dart -> main()",
+              "others.dart -> others()",
               style: TextStyle(color: Colors.red, fontSize: 30),
             ),
           )),
